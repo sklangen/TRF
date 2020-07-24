@@ -15,6 +15,7 @@ setup(
     packages=['trf'],
     long_description=long_description,
     long_description_content_type='text/markdown',
+    url='https://github.com/sklangen/TRF',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
