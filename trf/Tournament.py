@@ -32,4 +32,4 @@ class Tournament(object):
         if self.rounddates:
             return len(self.rounddates)
 
-        return max(len(p.rounds) for p in self.players) or len(self.players)-1
+        return max(len(p.games) for p in self.players) or len(self.players)-1
