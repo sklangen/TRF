@@ -134,11 +134,11 @@ def _parse_player(line):
         birthdate=match.group('birthdate').strip(),
         points=float(match.group('points')),
         rank=_int_or_default(match.group('rank')),
-        games=list(_parse_gamess(match.group('games')[2:].rstrip())),
+        games=list(_parse_games(match.group('games')[2:].rstrip())),
     )
 
 
-def _parse_gamess(string):
+def _parse_games(string):
     round = 1
     while len(string) >= 7:
         yield Game(
