@@ -5,6 +5,38 @@ import os
 class TestTrt(TestCase):
     maxDiff = None
 
+    def test_load_example1(self):
+        filename = os.path.join(os.path.dirname(__file__), 'example1.trf')
+        with open(filename) as f:
+            tour = load(f)
+
+        self.assertEqual(tour.name, '9. Karl-Mala-Gedenkturnier')
+        self.assertEqual(tour.city, 'Frankfurt (Main) /GER')
+        self.assertEqual(tour.federation,'')
+        self.assertEqual(tour.startdate, '28. 07. 2005')
+        self.assertEqual(tour.enddate, '31. 07. 2005')
+        self.assertEqual(tour.numplayers, 284)
+        self.assertEqual(tour.numratedplayers, 146)
+        self.assertEqual(tour.numteams, 0)
+        self.assertEqual(tour.type, 'Individual: Swiss-System (Standard)')
+        self.assertEqual(tour.chiefarbiter, 'Ralph Blum (SV Griesheim)')
+        self.assertEqual(tour.deputyarbiters, 'NSR Thomas Rondio, NSR Wolfgang Hettler')
+        self.assertEqual(tour.rateofplay, '40/120, 60')
+        self.assertEqual(tour.rounddates, [])
+        self.assertEqual(tour.numrounds, 7)
+
+        for p in tour.players:
+            self.assertIsInstance(p, Player)
+
+            for g in p.games:
+                self.assertIsInstance(g, Game)
+
+        self.assertEqual(tour.players[25].name, 'Schaffer,Hendrik')
+        self.assertEqual(tour.players[144].id, 24615480)
+        self.assertEqual(tour.players[114].rating, 1994)
+        self.assertEqual(tour.players[81].birthdate, '1965.09.07')
+        self.assertEqual(tour.players[74].games[4], Game(188, 'w', '1', 5))
+
     def test_example1_chinese_whispers(self):
         self.chinese_whispers('example1')
 
