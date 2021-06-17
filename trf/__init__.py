@@ -8,7 +8,7 @@ class TrfException(Exception):
     pass
 
 
-def dump(fp , tournament: Tournament):
+def dump(fp, tournament: Tournament):
     '''Dumps the tournament and saves the trf in the file fp points to'''
 
     _dump_tournament(fp, tournament)
@@ -140,7 +140,7 @@ def _parse_player(line):
 
 def _parse_games(string):
     round = 1
-    while len(string) >= 7:
+    while len(string) >= 8:
         yield Game(
             startrank=_int_or_default(string[:4].strip()),
             color=string[5],
@@ -149,10 +149,9 @@ def _parse_games(string):
         )
         round += 1
         string = string[10:]
-        
+
 
 def _int_or_default(string, default=None):
     if string == '' or string.isspace():
         return default
     return int(string)
-

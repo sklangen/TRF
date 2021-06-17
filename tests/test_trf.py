@@ -1,6 +1,13 @@
 from unittest import TestCase
-from trf import *
+import trf
 import os
+from tests import repeat
+import tests.random_tournament as rt
+
+CHINESE_WHISPERS_NUMBER = 100
+RANDOM_TEST_NUMBER = 300
+RANDOM_PLAYERS_NUMBER = 123
+
 
 class TestTrt(TestCase):
     maxDiff = None
@@ -8,11 +15,11 @@ class TestTrt(TestCase):
     def test_load_example1(self):
         filename = os.path.join(os.path.dirname(__file__), 'example1.trf')
         with open(filename) as f:
-            tour = load(f)
+            tour = trf.load(f)
 
         self.assertEqual(tour.name, '9. Karl-Mala-Gedenkturnier')
         self.assertEqual(tour.city, 'Frankfurt (Main) /GER')
-        self.assertEqual(tour.federation,'')
+        self.assertEqual(tour.federation, '')
         self.assertEqual(tour.startdate, '28. 07. 2005')
         self.assertEqual(tour.enddate, '31. 07. 2005')
         self.assertEqual(tour.numplayers, 284)
