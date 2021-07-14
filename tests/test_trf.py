@@ -64,22 +64,13 @@ class TestTrt(TestCase):
         with open(filename) as f:
             trf_string = f.read()
         tour0 = trf.loads(trf_string)
-        self.chinese_whispers(tour0, trf_string)
+        self.chinese_whispers(tour0)
 
-    def chinese_whispers(self, tour0, trf_string=None):
+    def chinese_whispers(self, tour0):
         dumped = trf.dumps(tour0)
 
         for i in range(CHINESE_WHISPERS_NUMBER):
             itertext = f' in iteration {i+1}'
-
-            dumped_lines = dumped.split('\n')
-
-            if trf_string is not None:
-                actual_lines = trf_string.split('\n')
-                self.assertEqual(len(dumped_lines), len(actual_lines))
-                for j, (acctual, expected) in enumerate(zip(dumped_lines, actual_lines)):
-                    self.assertEqual(acctual.strip(), expected.strip(),
-                                     f'Diff of line {j+1}' + itertext)
 
             tour = trf.loads(dumped)
             dumped = trf.dumps(tour)

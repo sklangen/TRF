@@ -1,0 +1,3 @@
+
+class TrfException(Exception):
+    pass
