@@ -1,12 +1,11 @@
-import os
 from setuptools import setup
 
 with open('README.md') as f:
-    long_description=f.read()
+    long_description = f.read()
 
 setup(
     name='trf',
-    version='1.0.0',
+    version='1.1.0',
     author='Schachklub Langen e. V.',
     author_email='Turnierleiter@sklangen.de',
     description='A parser and dumper for the fide approved tournament report format: trf',
