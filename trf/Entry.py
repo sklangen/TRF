@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from .Player import Player, Game
+from .Tournament import Team
 from .TrfException import TrfException
 import re
 
@@ -122,22 +123,25 @@ class PlayerEntry(TrfEntry):
             string = string[10:]
 
 
+def int_or_default(string, default=None):
+    if string == '' or string.isspace():
+        return default
+    return int(string)
+
+
 class TeamEntry(TrfEntry):
     def __init__(self):
         super().__init__('013')
 
     def dump(self, fp, tournament):
         for team in tournament.teams:
-            fp.write(f'013 {team}\n')
+            startranks = ' '.join(f'{s:>4}' for s in team.startranks)
+            fp.write(f'013 {team.name:32} {startranks}\n')
 
     def load(self, tournament, data):
-        tournament.teams.append(data)
-
-
-def int_or_default(string, default=None):
-    if string == '' or string.isspace():
-        return default
-    return int(string)
+        name = data[:32]
+        startranks = [int(s) for s in data[32:].split() if s]
+        tournament.teams.append(Team(name, startranks))
 
 
 ENTRIES = [

@@ -1,6 +1,6 @@
 from .Entry import ENTRIES
 from .Player import Player, Game
-from .Tournament import Tournament
+from .Tournament import Tournament, Team
 import io
 
 

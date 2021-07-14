@@ -1,4 +1,4 @@
-from trf import Game, Player, Tournament
+from trf import Game, Player, Tournament, Team
 import random
 import string
 
@@ -65,7 +65,14 @@ def rounddates(players: int):
 
 def xx_fields():
     size = random.randint(0, MAX_XX_FIELDS_SIZE)
-    return {'XX'+latin(1, space=False): latin(MAX_NAME_SIZE) for _ in range(size)}
+    return {'XX'+latin(1, space=False): latin(MAX_NAME_SIZE)
+            for _ in range(size)}
+
+
+def team(players):
+    members = random.randint(0, players)
+    sr = [random.randint(0, players) for _ in range(members)]
+    return Team(latin(32), sr)
 
 
 def tournament(players) -> Tournament:
@@ -83,7 +90,7 @@ def tournament(players) -> Tournament:
     rop = latin(MAX_NAME_SIZE)
     rd = rounddates(players)
     ps = [player(players) for _ in range(players)]
-    ts = [latin(MAX_NAME_SIZE) for _ in range(nt)]
+    ts = [team(players) for _ in range(nt)]
     xx = xx_fields()
     return Tournament(name=name, city=city, federation=fed, startdate=sd,
                       enddate=ed, numplayers=np, numratedplayers=nrp,

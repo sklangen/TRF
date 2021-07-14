@@ -4,6 +4,12 @@ from typing import List, Dict
 
 
 @dataclass
+class Team(object):
+    name: str = ''
+    startranks: List[int] = field(default_factory=list)
+
+
+@dataclass
 class Tournament(object):
     name: str = ''
     city: str = ''
