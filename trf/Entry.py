@@ -31,7 +31,7 @@ class SingleLineEntry(TrfEntry):
         return str(value)
 
     def load(self, tournament, data):
-        value = self.parse(data)
+        value = self.parse(data.strip())
         tournament.__dict__[self.fieldname] = value
 
     def parse(self, data):
@@ -57,7 +57,7 @@ class SingleLineListEntry(SingleLineEntry):
         fp.write(f'{self.din} {data}\n')
 
     def load(self, tournament, data):
-        value = [self.parse(s) for s in data.split(self.delim) if s]
+        value = [self.parse(s) for s in data.strip().split(self.delim) if s]
         tournament.__dict__[self.fieldname] = value
 
 
@@ -139,8 +139,8 @@ class TeamEntry(TrfEntry):
             fp.write(f'013 {team.name:32} {startranks}\n')
 
     def load(self, tournament, data):
-        name = data[:32]
-        startranks = [int(s) for s in data[32:].split() if s]
+        name = data[:32].strip()
+        startranks = [int(s) for s in data[32:].strip().split() if s]
         tournament.teams.append(Team(name, startranks))
 
 

@@ -44,7 +44,7 @@ def _parse_tournament(lines):
     for line in lines:
         for entry in ENTRIES:
             if line.startswith(entry.din + ' '):
-                entry.load(tournament, line[4:].rstrip())
+                entry.load(tournament, line[4:])
                 break
 
         if line.startswith('XX'):
