@@ -5,7 +5,7 @@ with open('README.md') as f:
 
 setup(
     name='trf',
-    version='1.1.0',
+    version='1.1.1',
     author='Schachklub Langen e. V.',
     author_email='Turnierleiter@sklangen.de',
     description='A parser and dumper for the fide approved tournament report format: trf',
